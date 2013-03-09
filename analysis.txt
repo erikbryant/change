@@ -1,0 +1,94 @@
+From ebryant Mon Dec 21 21:02:12 1992
+To: masgreg@ubvms.cc.buffalo.edu
+X-Lines: 87
+Status: RO
+Content-Length: 3679
+
+Greg,
+
+     Actually I did not write that program (as you probably figured).  A 
+friend of mine found it somewhere.
+
+     I have a new version of the ZOBO program.  It works on a single dictionary
+file instead of 10 of them.  I also included A and I in the dictionary so that
+now it can do single letter words (those are the only two single letter words
+I could think of).
+
+     I did some analysis and I think I see why you program is slower.  We will
+just cover the case of 4 letter words here.  Below that I imagine your program
+might be faster, above that I am sure it is much slower.
+
+     Assuming a 4 letter dictionary of 2890 words that is 2890 comparisons for
+my program.  Your program has to build a list of 104 words and then do its 
+comparisons.  The average number of comparisons you make on a search is 
+
+   (1/26 * 2890) / 2 = 55
+
+for the first search and 
+
+   (1/26 * 2786) / 2 = 53   (assuming you match all 104 words)
+
+We will assume an average search of 54 comparisons.  You have 104 words to 
+compare, giving a total number of comparisons of 5616.  My program makes 2890
+comparisons for the same results.  Add to this that each time you find a new
+word you want to look up you have to make 104 permutations of it and you have
+a lot of extra work.
+
+     It is interesting to note that if the dictionary consisted of all possible
+combinations of 4 letter words (which would make our program pretty trivial) 
+then I would have 456,976 comparisons while you would have on average
+
+   (1/26 * 456,976) / 2 = 8788
+
+comparisons per word for a total of 913,952 comparisons.  Your method is still 
+slower.
+
+     Suppose you changed your method so that you used an array or a binary
+tree instead of a linked list.  You could then perform a binary search on the
+list, greatly reducing your average number of searches.  With the current
+dictionary of 2890 words you would make an average number of comparisons 
+(without using the pointers to the start of each new letter block) of
+
+   log (2890) = 12
+      2
+
+total.  If you used your pointers to break up the words into 26 groups (grouped
+by first letter) then you would have an average number of comparisons of
+
+   log (2890 / 26) = 7
+      2
+
+total.  For each word you wanted to find the descendants of you would need
+
+   104 * 7 = 728 
+
+comparisons to my 2890.  If, again, the dictionary was increased to hold all
+possible combinations of 4 letters then I would need 456,976 comparisons and
+you would need 
+
+   log (456,976) * 104 = 1976
+      2
+
+comparisons.
+
+     Based on this information I think you should try to convert your version
+of the program to one that uses a binary tree (memory hog) or a static array
+(uncertain as to the best way to define its size).  If you use a binary tree
+then you may wish to balance it for performance.  I do not think I would 
+balance it after every delete, though as it is only going to be 12 levels 
+deep.  If you are going to use an array then you could take a guess as to
+how much data you will get in and allocate that much.  If you run out of 
+space then you can call realloc to dynamically extend the size of your array.
+Be sure you do not use any pointers into the array if you decide to use
+realloc as it can move your data around in memory.  Better use indexes instead.
+
+     I don't know if it is worth changing the program over as you will not
+really save that much time.  The program takes 7.3 seconds now on a SPARC IPC
+to go from erik to zobo.  Of this just over 2 seconds are spent reading in 
+the dictionary file.  This leaves you about 5 seconds you can try to trim off.
+I figure the best you can get is 3.5 seconds.
+
+     Have a great Christmas, dude!
+
+Erik
+
