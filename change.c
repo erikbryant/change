@@ -1,6 +1,6 @@
-static char Sccsid[] = "/* @(#) File: change.c  Version: 1.16  Update: 12/21/92 20:18:45  */";
-
 /******************************************************************************
+**
+** static char Sccsid[] = "@(#) File: change.c  Version: 1.16  Update: 12/21/92 20:18:45";
 **
 ** Author:
 **
@@ -43,7 +43,10 @@ static char Sccsid[] = "/* @(#) File: change.c  Version: 1.16  Update: 12/21/92 
 **
 ******************************************************************************/
 
+#include <ctype.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*
 ** The maximum length a word can be is this many characters.
@@ -92,11 +95,12 @@ wordlist Make_Node (string)
    char string[];
 
 {
-   wordlist new;
+   wordlist newWord;
 
-   if (new = (wordlist) malloc (sizeof (struct word_node)))
+   newWord = (wordlist) malloc (sizeof (struct word_node));
+   if ( newWord != NULL )
    {
-      strcpy (new->word, string);
+      strcpy (newWord->word, string);
    }
    else
    {
@@ -104,7 +108,7 @@ wordlist Make_Node (string)
       exit (9);
    }
 
-   return new;
+   return newWord;
 }
 
 
@@ -116,7 +120,7 @@ wordlist Make_Empty_List ()
 
 {
    wordlist list;
-   static call_count = 0;
+   static int call_count = 0;
    call_count++;
 
    /*
@@ -231,7 +235,7 @@ wordlist Find_String (list, string)
 }
 
 
-main(argc, argv)
+int main(argc, argv)
    int argc;
    char *argv[];
 
@@ -360,7 +364,7 @@ main(argc, argv)
             if (!strcmp (source, temp->word))
             {
                ADD_CHILD (tree, temp);
-               for (temp; temp = temp->parent)
+               for (; temp; temp = temp->parent)
                {
                   printf ("%s ", temp->word);
                }

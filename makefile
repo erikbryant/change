@@ -3,13 +3,11 @@
 # Gnu All-Permissive http://www.gnu.org/philosophy/license-list.html#GNUAllPermissive
 #
 
-CC       = g++ -Wall -Werror -Weffc++ -O3 -D_GLIBCXX_USE_NANOSLEEP
-CC_DEBUG = g++ -Wall -Werror -Weffc++ -D_GLIBCXX_DEBUG -g -fprofile-arcs -ftest-coverage -pg
-C11      = -std=c++11
+CC       = gcc -Wall -Werror -O3 -D_GLIBCXX_USE_NANOSLEEP
+CC_DEBUG = gcc -Wall -Werror -D_GLIBCXX_DEBUG -g -fprofile-arcs -ftest-coverage -pg
 THREADS  = -pthread
-CPPCHECK = ../../../cppcheck-1.58/cppcheck
 
-EXECUTABLES = change
+EXECUTABLES = change purge
 
 .PHONY: all
 all: $(EXECUTABLES)
@@ -20,8 +18,13 @@ clean:
 	rm -f *.gcov *.gcda *.gcno *.gprof \#*# gmon.out
 	rm -f a.out $(EXECUTABLES)
 
-change: change.c match.c purge.c
-	$(CPPCHECK) $^
+change: change.c match.c
+	$(CC_DEBUG) $@.c -o $@
+	./$@
+	gprof $@ gmon.out > $@.gprof
+	gcov $@ > /dev/null
+
+purge: purge.c
 	$(CC_DEBUG) $@.c -o $@
 	./$@
 	gprof $@ gmon.out > $@.gprof

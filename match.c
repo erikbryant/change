@@ -1,4 +1,6 @@
-static char Sccsid[] = "/* @(#) File: match.c  Version: 1.4  Update: 12/21/92 19:53:15  */";
+/*
+** static char Sccsid[] = "@(#) File: match.c  Version: 1.4  Update: 12/21/92 19:53:15";
+*/
 
 /*
 ** Given a word, find all the other words in the dictionary
