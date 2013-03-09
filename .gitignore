@@ -2,12 +2,10 @@ a.out
 *.[oa]
 *.h.gch
 .*.swp
-solutions
-bigint_test
-graphlib_test
+change
+purge
 .DS_Store
 perf.data*
-[0-9][0-9][0-9]
 *~
 \#*#
 *.gcda
