@@ -4,7 +4,7 @@
 #
 
 CC       = gcc -Wall -Werror -O3 -D_GLIBCXX_USE_NANOSLEEP
-CC_DEBUG = gcc -Wall -Werror -D_GLIBCXX_DEBUG -g -fprofile-arcs -ftest-coverage -pg
+CC_DEBUG = gcc -Wall -Werror -D_GLIBCXX_DEBUG -g -fprofile-arcs -ftest-coverage
 THREADS  = -pthread
 
 EXECUTABLES = change purge
