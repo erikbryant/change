@@ -4,6 +4,7 @@ a.out
 *.h.gch
 .*.swp
 change
+match
 purge
 .DS_Store
 perf.data*
