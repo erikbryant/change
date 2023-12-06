@@ -4,14 +4,14 @@
 **
 ** Author:
 **
-**    Written by Erik Bryant (ebryant@eclat.com)
-** 
-** Module Name: 
+**    Written by Erik Bryant (erikbryantology@gmail.com)
+**
+** Module Name:
 **
 **    purge.c
 **
 ** Description:
-**    
+**
 **    This program removes all of the words from a dictionary that are dead
 **    ends.  That is, they can not be derived from any other words.
 **
@@ -22,7 +22,7 @@
 **    void     Add_To_End ();
 **    wordlist Read_Dict ();
 **    wordlist Find_String ();
-**   
+**
 ** Things to do:
 **
 **     Allow for all the words to be in one big dictionary file.
@@ -144,7 +144,7 @@ void Add_To_End (list, node)
 /*
 ** Read an entire dictionary file into memory and build a
 ** linked list from it.
-*/ 
+*/
 wordlist Read_Dict (dict_number)
   int dict_number;
 
@@ -191,7 +191,7 @@ wordlist Read_Dict (dict_number)
 /*
 ** Print out all of the dictionary file except for those words of
 ** a given length.
-*/ 
+*/
 void Print_Dict (dict_number)
   int dict_number;
 
@@ -229,7 +229,7 @@ void Print_Dict (dict_number)
 
 /*
 ** Search a linked list for a string.  Once it is found remove
-** it from the list and return it.  Start scanning from the 
+** it from the list and return it.  Start scanning from the
 ** current position in the list.
 */
 wordlist Find_String (list, string)
@@ -263,7 +263,7 @@ int main(argc, argv)
    /*
    ** There must be exactly one argument.
    */
-   if (argc != 2) 
+   if (argc != 2)
    {
       fprintf (stderr, "Usage: purge <word-length>\n");
       exit (1);

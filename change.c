@@ -4,20 +4,20 @@
 **
 ** Author:
 **
-**    Written by Erik Bryant (ebryant@eclat.com)
+**    Written by Erik Bryant (erikbryantology@gmail.com)
 **    Modified by Greg Molik (molik@ubvms.cc.buffalo.edu)
-** 
-** Module Name: 
+**
+** Module Name:
 **
 **    change.c
 **
 ** Description:
-**    
+**
 **    This program takes as input two words and finds the shortest path from
 **    one word to the other, changing only one letter at a time.  For example:
 **
 **    ERIK ZOBO
-**    ERIK ERIE BRIE BRAE BRAS BOAS BOBS HOBS HOBO ZOBO 
+**    ERIK ERIE BRIE BRAE BRAS BOAS BOBS HOBS HOBO ZOBO
 **
 ** Local Functions:
 **
@@ -26,7 +26,7 @@
 **    void     Add_To_End ();
 **    wordlist Read_Dict ();
 **    wordlist Find_String ();
-**   
+**
 ** Things to do:
 **
 **     Optimize the code in main().
@@ -167,7 +167,7 @@ void Add_To_End (list, node)
 ** Read an entire dictionary file into memory and build a
 ** linked list from it.  Only store the words that are of
 ** the same length as the source and target words.
-*/ 
+*/
 wordlist Read_Dict (dict_number)
   int dict_number;
 
@@ -213,7 +213,7 @@ wordlist Read_Dict (dict_number)
 
 /*
 ** Search a linked list for a string.  Once it is found remove
-** it from the list and return it.  Start scanning from the 
+** it from the list and return it.  Start scanning from the
 ** current position in the list.
 */
 wordlist Find_String (list, string)
@@ -337,7 +337,7 @@ int main(argc, argv)
       tree->next->prev = search.first;
 
       /*
-       *  Check each word in the dictionary to see if it 
+       *  Check each word in the dictionary to see if it
        *  is close to the current word.
        */
       for (temp = dict.first->next; temp->next; temp = temp->next)
@@ -394,7 +394,3 @@ int main(argc, argv)
    fprintf (stderr, "No path.\n");
    exit (0);
 }
-
-
-
-
