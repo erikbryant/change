@@ -5,6 +5,7 @@ THREADS  = -pthread
 clean:
 	rm -f perf.data perf.data.old
 	rm -f *.gcov *.gcda *.gcno *.gprof \#*# gmon.out
+	rm -rf *.dSYM
 	rm -f a.out change purge
 
 change: change.c match.c
